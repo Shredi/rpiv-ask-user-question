@@ -96,6 +96,12 @@ const ERROR_SESSION_LOAD_FAILED =
 const ERROR_STALE_MODULE_CACHE =
 	"Error: the questionnaire UI cannot load — the host's module cache went stale after an earlier failed load (typically dependencies replaced on disk mid-session). This is unrecoverable within the current Pi process. The user never saw the questions — do NOT treat this as a decline. Ask the questions as plain chat text instead, and tell the user to restart Pi to restore this tool.";
 
+/**
+ * Program status Pi reports (OSC 7501) while the questionnaire waits for the user. A fixed
+ * message keeps question text out of the terminal record. Pi builds without the option ignore it.
+ */
+const BLOCKED_ON_QUESTION = { kind: "question", message: "Waiting for your answer" } as const;
+
 /** Standard terminal bell — same byte rpiv-warp exports as OSC_TERMINATOR. */
 export const BEL = "\x07";
 
@@ -324,8 +330,9 @@ async function mountQuestionnaire(config: {
 							overlayHandleRef.current = handle;
 							sessionRef.current?.setOverlayHandle(handle);
 						},
+						blocked: BLOCKED_ON_QUESTION,
 					}
-				: { overlay: false },
+				: { overlay: false, blocked: BLOCKED_ON_QUESTION },
 		);
 	} finally {
 		removeOverlayInputListener?.();

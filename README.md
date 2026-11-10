@@ -1,5 +1,7 @@
 # @juicesharp/rpiv-ask-user-question
 
+> **Temporary fork.** This repository is the published npm package `@juicesharp/rpiv-ask-user-question` 2.15.0, unchanged except for one fix in `ask-user-question.ts`: the questionnaire is opened with the `blocked` option of `ctx.ui.custom()` (inline and overlay), so Pi reports the session as blocked on a question instead of working while the dialog waits for an answer. Upstream request: https://github.com/juicesharp/rpiv-mono/issues/345. The fork ends when upstream releases the fix; use the upstream package unless you need this now. Licence and copyright are upstream's (MIT, see `LICENSE`).
+
 [![npm version](https://img.shields.io/npm/v/@juicesharp/rpiv-ask-user-question.svg)](https://www.npmjs.com/package/@juicesharp/rpiv-ask-user-question)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
